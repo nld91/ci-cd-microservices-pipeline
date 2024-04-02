@@ -7,12 +7,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build a Docker image for Service A
-      run: |
-        cd service_a
-        docker build . -t service_a
-    - name: Build a Docker image for Service B
-      run: |
-        cd service_b
-        docker build . -t service_b            
+      - uses: actions/checkout@v2
+      - name: Build a Docker image for Service A
+        run: |
+          cd service_a
+          docker build . -t service_a
+      - name: Build a Docker image for Service B
+        run: |
+          cd service_b
+          docker build . -t service_b
+        
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Service A
+        run: |
+          docker run service_a pytest
