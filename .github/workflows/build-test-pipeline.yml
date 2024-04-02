@@ -22,3 +22,7 @@ jobs:
         run: |
           cd service_b
           docker build . -t service_b
+
+      - name: Test Service B
+        run: |
+          docker run service_b pytest
