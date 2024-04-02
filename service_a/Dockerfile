@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/a
 
 COPY . .
 
@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 
-ENV NAME World
+ENV FLASK_APP=app/app.py:create_app
 
-CMD ["python", "app.py"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
